@@ -1,7 +1,7 @@
 # Mtr Play — Núcleo de datos (E1)
 
 Proyecto integrador — Ingeniería de Sistemas, UCC, 2026-II.
-Autor: Isaac D. Vergara F.
+apolinar petro garces
 
 ## Archivos
 
