@@ -44,3 +44,32 @@ lineas_pedido(
 Construir un backend (FastAPI) sobre esta misma base SQLite que exponga los endpoints de registro de
 pedidos (en transacción), consulta de historial por producto, y las 3 consultas de reporte ya validadas
 en el notebook — sin alterar el esquema ni las restricciones ya probadas.
+
+## E2 — Backend y pipeline
+
+Instala las dependencias y arranca el backend desde la raíz del repositorio:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+La documentación interactiva queda disponible en `http://127.0.0.1:8000/docs`.
+El backend usa `mtr_play_e1.sqlite`, activa las claves foráneas por conexión y conserva el esquema de E1.
+
+Para cargar otro CSV con el mismo formato de `datos_originales.csv`:
+
+```bash
+python pipeline.py datos_originales.csv --db-path mtr_play_e1.sqlite
+```
+
+El pipeline descarta filas sin `CustomerID`, con `UnitPrice <= 0` o con datos numéricos inválidos,
+captura duplicados exactos y muestra al final el total rechazado agrupado por motivo.
+
+Las pruebas se ejecutan con:
+
+```bash
+pytest
+```
